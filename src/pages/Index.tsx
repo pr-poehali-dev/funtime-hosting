@@ -19,13 +19,13 @@ const Index = () => {
       name: 'Business',
       price: '499',
       features: ['25 GB SSD', '5 сайтов', '100 GB трафик', 'cPanel панель', 'SSL сертификат', 'Бэкапы'],
-      popular: true,
+      popular: false,
     },
     {
       name: 'Premium',
       price: '999',
-      features: ['100 GB SSD', 'Безлимит сайтов', 'Безлимит трафик', 'cPanel панель', 'SSL сертификат', 'Бэкапы', 'Приоритет'],
-      popular: false,
+      features: ['100 GB SSD', 'Безлимит сайтов', 'Безлимит трафик', 'cPanel панель', 'SSL сертификат', 'Бэкапы', 'Приоритетная поддержка', 'DDoS защита'],
+      popular: true,
     },
   ];
 
@@ -40,13 +40,13 @@ const Index = () => {
       name: 'VPS-2',
       price: '1499',
       features: ['2 vCPU', '4 GB RAM', '50 GB SSD', '2 TB трафик', 'Root доступ', 'Бэкапы'],
-      popular: true,
+      popular: false,
     },
     {
       name: 'VPS-3',
       price: '2999',
-      features: ['4 vCPU', '8 GB RAM', '100 GB SSD', '5 TB трафик', 'Root доступ', 'Бэкапы', 'DDoS защита'],
-      popular: false,
+      features: ['4 vCPU', '8 GB RAM', '100 GB SSD', '5 TB трафик', 'Root доступ', 'Бэкапы', 'DDoS защита', 'Приоритет 24/7'],
+      popular: true,
     },
   ];
 
