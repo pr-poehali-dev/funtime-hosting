@@ -45,14 +45,14 @@ const Index = () => {
       name: 'Бог',
       price: '1234',
       features: ['8 GB RAM', '100 игроков', '40 GB NVMe', 'DDoS защита Premium', 'VIP поддержка 24/7', 'Бэкапы каждый час', 'Любые моды и плагины', 'MySQL + Redis', 'Выделенный IP'],
-      popular: true,
+      popular: false,
       isFree: false,
     },
     {
       name: 'Херобрин',
       price: '4895',
       features: ['16 GB RAM', '200+ игроков', '80 GB NVMe', 'DDoS защита Enterprise', 'Персональный менеджер', 'Бэкапы в реальном времени', 'Полный root доступ', 'MySQL + Redis + MongoDB', 'Несколько IP адресов', 'Приоритет обработки'],
-      popular: false,
+      popular: true,
       isFree: false,
     },
   ];
