@@ -5,9 +5,21 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Icon from '@/components/ui/icon';
 
+interface Particle {
+  id: number;
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  size: number;
+  color: string;
+  life: number;
+}
+
 const Index = () => {
   const [activeTab, setActiveTab] = useState('hosting');
   const [spotsLeft, setSpotsLeft] = useState(3);
+  const [particles, setParticles] = useState<Particle[]>([]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -17,6 +29,52 @@ const Index = () => {
       });
     }, 15000);
     return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const createExplosion = () => {
+      const x = Math.random() * window.innerWidth;
+      const y = Math.random() * (window.innerHeight * 0.6);
+      const newParticles: Particle[] = [];
+      
+      for (let i = 0; i < 30; i++) {
+        const angle = (Math.PI * 2 * i) / 30;
+        const speed = 2 + Math.random() * 3;
+        newParticles.push({
+          id: Date.now() + i,
+          x,
+          y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          size: 4 + Math.random() * 6,
+          color: ['#ef4444', '#f97316', '#fbbf24', '#ffffff'][Math.floor(Math.random() * 4)],
+          life: 100,
+        });
+      }
+      
+      setParticles(prev => [...prev, ...newParticles]);
+    };
+
+    const explosionInterval = setInterval(createExplosion, 2000);
+
+    const animationFrame = setInterval(() => {
+      setParticles(prev => 
+        prev
+          .map(p => ({
+            ...p,
+            x: p.x + p.vx,
+            y: p.y + p.vy,
+            vy: p.vy + 0.15,
+            life: p.life - 2,
+          }))
+          .filter(p => p.life > 0)
+      );
+    }, 30);
+
+    return () => {
+      clearInterval(explosionInterval);
+      clearInterval(animationFrame);
+    };
   }, []);
 
   const hostingPlans = [
@@ -89,7 +147,24 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-black">
+    <div className="min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-black relative overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {particles.map((particle) => (
+          <div
+            key={particle.id}
+            className="absolute rounded-full transition-opacity"
+            style={{
+              left: `${particle.x}px`,
+              top: `${particle.y}px`,
+              width: `${particle.size}px`,
+              height: `${particle.size}px`,
+              backgroundColor: particle.color,
+              opacity: particle.life / 100,
+              boxShadow: `0 0 ${particle.size * 2}px ${particle.color}`,
+            }}
+          />
+        ))}
+      </div>
       <header className="border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
