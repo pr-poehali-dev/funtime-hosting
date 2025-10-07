@@ -286,6 +286,8 @@ const Index = () => {
                   className={`relative transition-all hover:shadow-xl ${
                     plan.popular
                       ? 'border-2 border-primary shadow-2xl shadow-primary/20 scale-110 bg-gradient-to-br from-primary/5 via-background to-secondary/5 z-10'
+                      : plan.isFree
+                      ? 'border-2 border-green-500 shadow-xl shadow-green-500/20'
                       : 'hover:scale-105'
                   }`}
                 >
@@ -299,7 +301,14 @@ const Index = () => {
                       </Badge>
                     </div>
                   )}
-                  <CardHeader className={plan.popular ? 'pt-10' : ''}>
+                  {plan.isFree && (
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20">
+                      <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-lg px-4 py-1 text-sm font-bold">
+                        🎁 НАВСЕГДА БЕСПЛАТНО
+                      </Badge>
+                    </div>
+                  )}
+                  <CardHeader className={plan.popular || plan.isFree ? 'pt-10' : ''}>
                     <CardTitle className={`text-xl ${plan.popular ? 'text-transparent bg-gradient-to-r from-primary to-secondary bg-clip-text' : plan.isFree ? 'text-accent' : ''}`}>
                       {plan.name}
                     </CardTitle>
