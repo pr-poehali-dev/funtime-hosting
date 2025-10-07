@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -7,6 +7,17 @@ import Icon from '@/components/ui/icon';
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('hosting');
+  const [spotsLeft, setSpotsLeft] = useState(3);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSpotsLeft((prev) => {
+        if (prev <= 1) return Math.floor(Math.random() * 3) + 2;
+        return prev - (Math.random() > 0.7 ? 1 : 0);
+      });
+    }, 15000);
+    return () => clearInterval(interval);
+  }, []);
 
   const hostingPlans = [
     {
@@ -150,13 +161,16 @@ const Index = () => {
                   }`}
                 >
                   {plan.popular && (
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1">
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 z-20">
                       <Badge className="bg-gradient-to-r from-primary via-secondary to-accent text-white shadow-lg animate-pulse px-4 py-1 text-sm font-bold">
                         🔥 ЛУЧШИЙ ВЫБОР
                       </Badge>
+                      <Badge variant="destructive" className="bg-red-500 text-white text-xs px-3 py-0.5 animate-pulse">
+                        ⚡ Осталось {spotsLeft} места
+                      </Badge>
                     </div>
                   )}
-                  <CardHeader className={plan.popular ? 'pt-8' : ''}>
+                  <CardHeader className={plan.popular ? 'pt-10' : ''}>
                     <CardTitle className={`text-2xl ${plan.popular ? 'text-transparent bg-gradient-to-r from-primary to-secondary bg-clip-text' : ''}`}>
                       {plan.name}
                     </CardTitle>
@@ -166,7 +180,13 @@ const Index = () => {
                       </span>
                       <span className="text-muted-foreground"> ₽/мес</span>
                       {plan.popular && (
-                        <div className="mt-2 text-xs text-accent font-semibold">Экономия 30%</div>
+                        <div className="mt-2 flex items-center gap-2">
+                          <div className="text-xs text-accent font-semibold">Экономия 30%</div>
+                          <div className="text-xs text-red-500 font-bold flex items-center gap-1">
+                            <Icon name="Clock" size={12} />
+                            Акция до конца дня
+                          </div>
+                        </div>
                       )}
                     </CardDescription>
                   </CardHeader>
@@ -206,13 +226,16 @@ const Index = () => {
                   }`}
                 >
                   {plan.popular && (
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1">
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 z-20">
                       <Badge className="bg-gradient-to-r from-primary via-secondary to-accent text-white shadow-lg animate-pulse px-4 py-1 text-sm font-bold">
                         🔥 ЛУЧШИЙ ВЫБОР
                       </Badge>
+                      <Badge variant="destructive" className="bg-red-500 text-white text-xs px-3 py-0.5 animate-pulse">
+                        ⚡ Осталось {spotsLeft} места
+                      </Badge>
                     </div>
                   )}
-                  <CardHeader className={plan.popular ? 'pt-8' : ''}>
+                  <CardHeader className={plan.popular ? 'pt-10' : ''}>
                     <CardTitle className={`text-2xl ${plan.popular ? 'text-transparent bg-gradient-to-r from-primary to-secondary bg-clip-text' : ''}`}>
                       {plan.name}
                     </CardTitle>
@@ -222,7 +245,13 @@ const Index = () => {
                       </span>
                       <span className="text-muted-foreground"> ₽/мес</span>
                       {plan.popular && (
-                        <div className="mt-2 text-xs text-accent font-semibold">Экономия 25%</div>
+                        <div className="mt-2 flex items-center gap-2">
+                          <div className="text-xs text-accent font-semibold">Экономия 25%</div>
+                          <div className="text-xs text-red-500 font-bold flex items-center gap-1">
+                            <Icon name="Clock" size={12} />
+                            Акция до конца дня
+                          </div>
+                        </div>
                       )}
                     </CardDescription>
                   </CardHeader>
