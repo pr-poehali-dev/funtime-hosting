@@ -21,43 +21,63 @@ const Index = () => {
 
   const hostingPlans = [
     {
-      name: 'Start',
-      price: '199',
-      features: ['5 GB SSD', '1 сайт', '10 GB трафик', 'cPanel панель', 'SSL сертификат'],
+      name: 'Создатель',
+      price: '0',
+      features: ['2 GB RAM', '10 игроков', '5 GB SSD', 'Автозапуск', 'FTP доступ', 'Базовая поддержка'],
       popular: false,
+      isFree: true,
     },
     {
-      name: 'Business',
-      price: '499',
-      features: ['25 GB SSD', '5 сайтов', '100 GB трафик', 'cPanel панель', 'SSL сертификат', 'Бэкапы'],
+      name: 'Bronze',
+      price: '299',
+      features: ['4 GB RAM', '30 игроков', '15 GB NVMe', 'DDoS защита', 'FTP/SFTP', 'Бэкапы каждый день', 'Установка модов'],
       popular: false,
+      isFree: false,
     },
     {
-      name: 'Premium',
+      name: 'Silver',
+      price: '599',
+      features: ['8 GB RAM', '60 игроков', '30 GB NVMe', 'DDoS защита Pro', 'Приоритет поддержки', 'Бэкапы каждые 6 часов', 'Мгновенная установка модов', 'MySQL база'],
+      popular: false,
+      isFree: false,
+    },
+    {
+      name: 'Gold',
       price: '999',
-      features: ['100 GB SSD', 'Безлимит сайтов', 'Безлимит трафик', 'cPanel панель', 'SSL сертификат', 'Бэкапы', 'Приоритетная поддержка', 'DDoS защита'],
+      features: ['16 GB RAM', '100 игроков', '60 GB NVMe', 'DDoS защита Premium', 'VIP поддержка 24/7', 'Бэкапы каждый час', 'Любые моды и плагины', 'MySQL + Redis', 'Выделенный IP'],
       popular: true,
+      isFree: false,
+    },
+    {
+      name: 'Diamond',
+      price: '1999',
+      features: ['32 GB RAM', '200+ игроков', '120 GB NVMe', 'DDoS защита Enterprise', 'Персональный менеджер', 'Бэкапы в реальном времени', 'Полный root доступ', 'MySQL + Redis + MongoDB', 'Несколько IP адресов', 'Приоритет обработки'],
+      popular: false,
+      isFree: false,
     },
   ];
 
   const vpsPlans = [
     {
-      name: 'VPS-1',
-      price: '699',
-      features: ['1 vCPU', '2 GB RAM', '25 GB SSD', '1 TB трафик', 'Root доступ'],
+      name: 'Starter Network',
+      price: '3499',
+      features: ['8 vCPU', '16 GB RAM', '100 GB NVMe', 'Безлимит трафик', 'До 5 серверов', 'BungeeCord/Velocity', 'DDoS защита', 'Панель управления'],
       popular: false,
+      isFree: false,
     },
     {
-      name: 'VPS-2',
-      price: '1499',
-      features: ['2 vCPU', '4 GB RAM', '50 GB SSD', '2 TB трафик', 'Root доступ', 'Бэкапы'],
-      popular: false,
-    },
-    {
-      name: 'VPS-3',
-      price: '2999',
-      features: ['4 vCPU', '8 GB RAM', '100 GB SSD', '5 TB трафик', 'Root доступ', 'Бэкапы', 'DDoS защита', 'Приоритет 24/7'],
+      name: 'Pro Network',
+      price: '5999',
+      features: ['16 vCPU', '32 GB RAM', '200 GB NVMe', 'Безлимит трафик', 'До 15 серверов', 'BungeeCord/Velocity', 'DDoS защита Pro', 'Балансировка нагрузки', 'Кластер MySQL'],
       popular: true,
+      isFree: false,
+    },
+    {
+      name: 'Enterprise Network',
+      price: '9999',
+      features: ['32 vCPU', '64 GB RAM', '500 GB NVMe', 'Безлимит трафик', 'Безлимит серверов', 'Полная кастомизация', 'DDoS защита Enterprise', 'Выделенное оборудование', 'Kubernetes кластер', 'Приоритет 24/7'],
+      popular: false,
+      isFree: false,
     },
   ];
 
@@ -69,30 +89,30 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-muted">
-      <header className="border-b bg-background/80 backdrop-blur-sm sticky top-0 z-50">
+    <div className="min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-black">
+      <header className="border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
                 <Icon name="Server" size={24} className="text-white" />
               </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                FunTime
+              <span className="text-2xl font-bold text-white">
+                FunTime <span className="text-accent">MC</span>
               </span>
             </div>
             <nav className="hidden md:flex items-center gap-6">
-              <a href="#hosting" className="text-foreground/70 hover:text-foreground transition-colors">
+              <a href="#hosting" className="text-slate-300 hover:text-white transition-colors">
                 Хостинг
               </a>
-              <a href="#vps" className="text-foreground/70 hover:text-foreground transition-colors">
-                VPS/VDS
+              <a href="#vps" className="text-slate-300 hover:text-white transition-colors">
+                Сеть серверов
               </a>
-              <a href="#services" className="text-foreground/70 hover:text-foreground transition-colors">
+              <a href="#services" className="text-slate-300 hover:text-white transition-colors">
                 Услуги
               </a>
-              <a href="#about" className="text-foreground/70 hover:text-foreground transition-colors">
-                О компании
+              <a href="#about" className="text-slate-300 hover:text-white transition-colors">
+                О нас
               </a>
               <Button variant="outline" size="sm">
                 Войти
@@ -109,14 +129,14 @@ const Index = () => {
             🚀 Быстрый старт за 5 минут
           </Badge>
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
-            Маркетплейс
+            Minecraft хостинг
             <br />
             <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-              хостинг-услуг
+              премиум качества
             </span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Выберите идеальное решение для вашего проекта: от виртуального хостинга до мощных VPS серверов
+            Запустите свой сервер за 5 минут! Тариф "Создатель" бесплатно навсегда 🎮
           </p>
           <div className="flex gap-4 justify-center pt-4">
             <Button size="lg" className="gap-2">
@@ -140,17 +160,17 @@ const Index = () => {
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-12">
             <TabsTrigger value="hosting" className="gap-2">
-              <Icon name="HardDrive" size={16} />
-              Виртуальный хостинг
+              <Icon name="Gamepad2" size={16} />
+              Игровой хостинг
             </TabsTrigger>
             <TabsTrigger value="vps" className="gap-2">
-              <Icon name="Server" size={16} />
-              VPS/VDS
+              <Icon name="Network" size={16} />
+              Сеть серверов
             </TabsTrigger>
           </TabsList>
 
           <TabsContent value="hosting" className="animate-fade-in">
-            <div className="grid md:grid-cols-3 gap-6 items-center">
+            <div className="grid md:grid-cols-5 gap-4 items-start">
               {hostingPlans.map((plan) => (
                 <Card
                   key={plan.name}
@@ -171,22 +191,31 @@ const Index = () => {
                     </div>
                   )}
                   <CardHeader className={plan.popular ? 'pt-10' : ''}>
-                    <CardTitle className={`text-2xl ${plan.popular ? 'text-transparent bg-gradient-to-r from-primary to-secondary bg-clip-text' : ''}`}>
+                    <CardTitle className={`text-xl ${plan.popular ? 'text-transparent bg-gradient-to-r from-primary to-secondary bg-clip-text' : plan.isFree ? 'text-accent' : ''}`}>
                       {plan.name}
                     </CardTitle>
                     <CardDescription>
-                      <span className={`text-5xl font-bold ${plan.popular ? 'text-primary' : 'text-foreground'}`}>
-                        {plan.price}
-                      </span>
-                      <span className="text-muted-foreground"> ₽/мес</span>
-                      {plan.popular && (
-                        <div className="mt-2 flex items-center gap-2">
-                          <div className="text-xs text-accent font-semibold">Экономия 30%</div>
-                          <div className="text-xs text-red-500 font-bold flex items-center gap-1">
-                            <Icon name="Clock" size={12} />
-                            Акция до конца дня
-                          </div>
+                      {plan.isFree ? (
+                        <div className="space-y-1">
+                          <div className="text-4xl font-bold text-accent">Бесплатно</div>
+                          <div className="text-xs text-accent font-semibold">Навсегда для создателей! 🎁</div>
                         </div>
+                      ) : (
+                        <>
+                          <span className={`text-4xl font-bold ${plan.popular ? 'text-primary' : 'text-foreground'}`}>
+                            {plan.price}
+                          </span>
+                          <span className="text-muted-foreground"> ₽/мес</span>
+                          {plan.popular && (
+                            <div className="mt-2 flex items-center gap-2">
+                              <div className="text-xs text-accent font-semibold">Экономия 30%</div>
+                              <div className="text-xs text-red-500 font-bold flex items-center gap-1">
+                                <Icon name="Clock" size={12} />
+                                Акция до конца дня
+                              </div>
+                            </div>
+                          )}
+                        </>
                       )}
                     </CardDescription>
                   </CardHeader>
@@ -215,7 +244,7 @@ const Index = () => {
           </TabsContent>
 
           <TabsContent value="vps" className="animate-fade-in">
-            <div className="grid md:grid-cols-3 gap-6 items-center">
+            <div className="grid md:grid-cols-3 gap-6 items-start">
               {vpsPlans.map((plan) => (
                 <Card
                   key={plan.name}
@@ -281,7 +310,7 @@ const Index = () => {
         </Tabs>
       </section>
 
-      <section id="services" className="container mx-auto px-4 py-20 bg-muted/50">
+      <section id="services" className="container mx-auto px-4 py-20 bg-slate-900/50">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold mb-4">Дополнительные услуги</h2>
           <p className="text-xl text-muted-foreground">Расширьте возможности вашего хостинга</p>
@@ -312,10 +341,9 @@ const Index = () => {
       <section id="about" className="container mx-auto px-4 py-20">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
-            <h2 className="text-4xl font-bold">О компании FunTime</h2>
+            <h2 className="text-4xl font-bold">О FunTime MC Hosting</h2>
             <p className="text-lg text-muted-foreground">
-              Мы предоставляем надежные хостинг-услуги с 2015 года. Наша миссия — сделать размещение сайтов
-              простым, быстрым и доступным для всех.
+              Мы предоставляем премиум Minecraft хостинг с 2020 года. Наша миссия — дать каждому возможность создать свой сервер, начиная с бесплатного тарифа!
             </p>
             <div className="grid grid-cols-2 gap-6">
               <div className="space-y-2">
