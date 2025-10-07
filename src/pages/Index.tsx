@@ -114,10 +114,10 @@ const Index = () => {
   const hostingPlans = [
     {
       name: 'Игрок',
-      price: '23',
+      price: '0',
       features: ['1 GB RAM', '10 игроков', '5 GB SSD', 'Автозапуск', 'FTP доступ', 'Базовая поддержка'],
       popular: false,
-      isFree: false,
+      isFree: true,
     },
     {
       name: 'Про',
