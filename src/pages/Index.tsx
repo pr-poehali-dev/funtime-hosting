@@ -21,6 +21,40 @@ const Index = () => {
   const [spotsLeft, setSpotsLeft] = useState(3);
   const [particles, setParticles] = useState<Particle[]>([]);
 
+  const playExplosionSound = () => {
+    const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    oscillator.frequency.value = 100;
+    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+    
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + 0.5);
+    
+    const whiteNoise = audioContext.createBufferSource();
+    const bufferSize = audioContext.sampleRate * 0.3;
+    const buffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = Math.random() * 2 - 1;
+    }
+    whiteNoise.buffer = buffer;
+    
+    const noiseGain = audioContext.createGain();
+    whiteNoise.connect(noiseGain);
+    noiseGain.connect(audioContext.destination);
+    noiseGain.gain.setValueAtTime(0.2, audioContext.currentTime);
+    noiseGain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+    
+    whiteNoise.start(audioContext.currentTime);
+    whiteNoise.stop(audioContext.currentTime + 0.3);
+  };
+
   useEffect(() => {
     const interval = setInterval(() => {
       setSpotsLeft((prev) => {
@@ -306,6 +340,7 @@ const Index = () => {
                   </CardContent>
                   <CardFooter>
                     <Button
+                      onClick={playExplosionSound}
                       className={`w-full ${plan.popular ? 'bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 shadow-lg' : ''}`}
                       variant={plan.popular ? 'default' : 'outline'}
                       size={plan.popular ? 'lg' : 'default'}
@@ -371,6 +406,7 @@ const Index = () => {
                   </CardContent>
                   <CardFooter>
                     <Button
+                      onClick={playExplosionSound}
                       className={`w-full ${plan.popular ? 'bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 shadow-lg' : ''}`}
                       variant={plan.popular ? 'default' : 'outline'}
                       size={plan.popular ? 'lg' : 'default'}
