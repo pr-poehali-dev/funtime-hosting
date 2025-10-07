@@ -139,39 +139,54 @@ const Index = () => {
           </TabsList>
 
           <TabsContent value="hosting" className="animate-fade-in">
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-3 gap-6 items-center">
               {hostingPlans.map((plan) => (
                 <Card
                   key={plan.name}
                   className={`relative transition-all hover:shadow-xl ${
-                    plan.popular ? 'border-primary shadow-lg scale-105' : ''
+                    plan.popular
+                      ? 'border-2 border-primary shadow-2xl shadow-primary/20 scale-110 bg-gradient-to-br from-primary/5 via-background to-secondary/5 z-10'
+                      : 'hover:scale-105'
                   }`}
                 >
                   {plan.popular && (
-                    <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-secondary">
-                      Популярный
-                    </Badge>
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1">
+                      <Badge className="bg-gradient-to-r from-primary via-secondary to-accent text-white shadow-lg animate-pulse px-4 py-1 text-sm font-bold">
+                        🔥 ЛУЧШИЙ ВЫБОР
+                      </Badge>
+                    </div>
                   )}
-                  <CardHeader>
-                    <CardTitle className="text-2xl">{plan.name}</CardTitle>
+                  <CardHeader className={plan.popular ? 'pt-8' : ''}>
+                    <CardTitle className={`text-2xl ${plan.popular ? 'text-transparent bg-gradient-to-r from-primary to-secondary bg-clip-text' : ''}`}>
+                      {plan.name}
+                    </CardTitle>
                     <CardDescription>
-                      <span className="text-4xl font-bold text-foreground">{plan.price}</span>
+                      <span className={`text-5xl font-bold ${plan.popular ? 'text-primary' : 'text-foreground'}`}>
+                        {plan.price}
+                      </span>
                       <span className="text-muted-foreground"> ₽/мес</span>
+                      {plan.popular && (
+                        <div className="mt-2 text-xs text-accent font-semibold">Экономия 30%</div>
+                      )}
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-3">
                       {plan.features.map((feature, index) => (
                         <li key={index} className="flex items-center gap-2">
-                          <Icon name="CheckCircle2" size={18} className="text-accent" />
-                          <span>{feature}</span>
+                          <Icon name="CheckCircle2" size={18} className={plan.popular ? 'text-primary' : 'text-accent'} />
+                          <span className={plan.popular ? 'font-medium' : ''}>{feature}</span>
                         </li>
                       ))}
                     </ul>
                   </CardContent>
                   <CardFooter>
-                    <Button className="w-full" variant={plan.popular ? 'default' : 'outline'}>
-                      Заказать
+                    <Button
+                      className={`w-full ${plan.popular ? 'bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 shadow-lg' : ''}`}
+                      variant={plan.popular ? 'default' : 'outline'}
+                      size={plan.popular ? 'lg' : 'default'}
+                    >
+                      {plan.popular ? '🚀 Заказать сейчас' : 'Заказать'}
                     </Button>
                   </CardFooter>
                 </Card>
@@ -180,39 +195,54 @@ const Index = () => {
           </TabsContent>
 
           <TabsContent value="vps" className="animate-fade-in">
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-3 gap-6 items-center">
               {vpsPlans.map((plan) => (
                 <Card
                   key={plan.name}
                   className={`relative transition-all hover:shadow-xl ${
-                    plan.popular ? 'border-primary shadow-lg scale-105' : ''
+                    plan.popular
+                      ? 'border-2 border-primary shadow-2xl shadow-primary/20 scale-110 bg-gradient-to-br from-primary/5 via-background to-secondary/5 z-10'
+                      : 'hover:scale-105'
                   }`}
                 >
                   {plan.popular && (
-                    <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-secondary">
-                      Популярный
-                    </Badge>
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1">
+                      <Badge className="bg-gradient-to-r from-primary via-secondary to-accent text-white shadow-lg animate-pulse px-4 py-1 text-sm font-bold">
+                        🔥 ЛУЧШИЙ ВЫБОР
+                      </Badge>
+                    </div>
                   )}
-                  <CardHeader>
-                    <CardTitle className="text-2xl">{plan.name}</CardTitle>
+                  <CardHeader className={plan.popular ? 'pt-8' : ''}>
+                    <CardTitle className={`text-2xl ${plan.popular ? 'text-transparent bg-gradient-to-r from-primary to-secondary bg-clip-text' : ''}`}>
+                      {plan.name}
+                    </CardTitle>
                     <CardDescription>
-                      <span className="text-4xl font-bold text-foreground">{plan.price}</span>
+                      <span className={`text-5xl font-bold ${plan.popular ? 'text-primary' : 'text-foreground'}`}>
+                        {plan.price}
+                      </span>
                       <span className="text-muted-foreground"> ₽/мес</span>
+                      {plan.popular && (
+                        <div className="mt-2 text-xs text-accent font-semibold">Экономия 25%</div>
+                      )}
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-3">
                       {plan.features.map((feature, index) => (
                         <li key={index} className="flex items-center gap-2">
-                          <Icon name="CheckCircle2" size={18} className="text-accent" />
-                          <span>{feature}</span>
+                          <Icon name="CheckCircle2" size={18} className={plan.popular ? 'text-primary' : 'text-accent'} />
+                          <span className={plan.popular ? 'font-medium' : ''}>{feature}</span>
                         </li>
                       ))}
                     </ul>
                   </CardContent>
                   <CardFooter>
-                    <Button className="w-full" variant={plan.popular ? 'default' : 'outline'}>
-                      Заказать
+                    <Button
+                      className={`w-full ${plan.popular ? 'bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 shadow-lg' : ''}`}
+                      variant={plan.popular ? 'default' : 'outline'}
+                      size={plan.popular ? 'lg' : 'default'}
+                    >
+                      {plan.popular ? '🚀 Заказать сейчас' : 'Заказать'}
                     </Button>
                   </CardFooter>
                 </Card>
