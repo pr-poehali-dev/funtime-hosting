@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -17,6 +18,7 @@ interface Particle {
 }
 
 const Index = () => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('hosting');
   const [spotsLeft, setSpotsLeft] = useState(3);
   const [particles, setParticles] = useState<Particle[]>([]);
@@ -53,6 +55,11 @@ const Index = () => {
     
     whiteNoise.start(audioContext.currentTime);
     whiteNoise.stop(audioContext.currentTime + 0.3);
+  };
+
+  const handleOrderClick = (planName: string) => {
+    playExplosionSound();
+    navigate(`/dashboard?plan=${encodeURIComponent(planName)}`);
   };
 
   useEffect(() => {
@@ -349,7 +356,7 @@ const Index = () => {
                   </CardContent>
                   <CardFooter>
                     <Button
-                      onClick={playExplosionSound}
+                      onClick={() => handleOrderClick(plan.name)}
                       className={`w-full ${plan.popular ? 'bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 shadow-lg' : ''}`}
                       variant={plan.popular ? 'default' : 'outline'}
                       size={plan.popular ? 'lg' : 'default'}
@@ -415,7 +422,7 @@ const Index = () => {
                   </CardContent>
                   <CardFooter>
                     <Button
-                      onClick={playExplosionSound}
+                      onClick={() => handleOrderClick(plan.name)}
                       className={`w-full ${plan.popular ? 'bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 shadow-lg' : ''}`}
                       variant={plan.popular ? 'default' : 'outline'}
                       size={plan.popular ? 'lg' : 'default'}
